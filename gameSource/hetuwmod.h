@@ -317,6 +317,12 @@ public:
 	static int cfgVersionNumber;
 	static int cfgVersionRead;
 
+	// moved to public to be used by joyMod.cpp
+	static bool upKeyDown;
+	static bool downKeyDown;
+	static bool leftKeyDown;
+	static bool rightKeyDown;
+
 	static unsigned char charKey_Up;
 	static unsigned char charKey_Down;
 	static unsigned char charKey_Left;
@@ -490,6 +496,8 @@ public:
 	static bool tileHasClosedDoor(int x, int y);
 	static bool dirIsSafeToWalk(int x, int y, int dir);
 	static bool findNextMove(int &x, int &y, int dir);
+	// moved to public to be used by joyMod
+	static void move(); // called only once on frame - dont use
 
 	static void setOurFamilyName(const char* lastName);
 	static void getOurFamilyName();
@@ -689,10 +697,6 @@ private:
 	static float lastPosX;
 	static float lastPosY;
 
-	static bool upKeyDown;
-	static bool downKeyDown;
-	static bool leftKeyDown;
-	static bool rightKeyDown;
 
 	static bool mapZoomInKeyDown;
 	static bool mapZoomOutKeyDown;
@@ -701,7 +705,6 @@ private:
 	static void initClosedDoorIDs();
 	static void initSettings();
 
-	static void move(); // called only once on frame - dont use
 	static bool setMoveDirIfSafe(int &x, int &y, int dir);
 	static int magnetMoveDir;
 	static int magnetWrongMoveDir;

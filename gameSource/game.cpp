@@ -2593,6 +2593,44 @@ void pointerMove( float inX, float inY ) {
 
 
 
+// controller support:
+void joyButtonDown(int button) {    
+    if (isPaused()) 
+        return;
+    if (currentGamePage != NULL)
+        currentGamePage->joyButtonDown(button);
+}
+void joyButtonUp(int button) {
+    if (isPaused()) 
+        return;
+    if (currentGamePage != NULL)
+        currentGamePage->joyButtonUp(button);
+}
+void joyDPadDown(int dir) {
+    if (isPaused()) 
+        return;
+    if (currentGamePage != NULL)
+        currentGamePage->joyDPadDown(dir);
+}
+void joyDPadUp(void) {
+    if (isPaused()) 
+        return;
+    if (currentGamePage != NULL)
+        currentGamePage->joyDPadUp();
+}
+void joyRudder(int rudder, int pressure) {
+    if (isPaused()) 
+        return;
+    if (currentGamePage != NULL)
+        currentGamePage->joyRudder(rudder, pressure);
+}
+void joyThumbstick(int stick, int x, int y)
+{
+    if (isPaused()) 
+        return;
+    if (currentGamePage != NULL)
+        currentGamePage->joyThumbstick(stick, x, y);
+}
 
 void pointerDown( float inX, float inY ) {
     if( isPaused() ) {

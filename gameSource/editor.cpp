@@ -1491,6 +1491,14 @@ void pointerMove( float inX, float inY ) {
     }
 
 
+// controller support:
+// does not do anything for now
+void joyButtonDown(int button) {}
+void joyButtonUp(int button) {}
+void joyDPadDown(int dir) {}
+void joyDPadUp(void) {}
+void joyRudder(int rudder, int pressure) {}
+void joyThumbstick(int stick, int x, int y) {}
 
 void pointerDown( float inX, float inY ) {
     if( isPaused() ) {

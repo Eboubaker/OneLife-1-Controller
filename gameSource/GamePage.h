@@ -16,6 +16,14 @@ class GamePage : public PageComponent {
 
         virtual ~GamePage();
         
+        // controller support:
+        virtual void joyButtonDown(int button) {}
+        virtual void joyButtonUp(int button) {}
+        virtual void joyDPadDown(int dir) {}
+        virtual void joyDPadUp(void) {}
+        virtual void joyRudder(int rudder, int pressure) {}
+        virtual void joyThumbstick(int stick, int x, int y) {}
+
         void setStatus( const char *inStatusMessageKey, char inError );
 
         // inStatusMessage destroyed by caller

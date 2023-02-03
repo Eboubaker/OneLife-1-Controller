@@ -525,6 +525,14 @@ class LivingLifePage : public GamePage, public ActionListener {
   
         virtual void makeActive( char inFresh );
         
+        // controller support:
+        virtual void joyButtonDown(int button);
+        virtual void joyButtonUp(int button);
+        virtual void joyDPadDown(int dir);
+        virtual void joyDPadUp(void);
+        virtual void joyRudder(int rudder, int pressure);
+        virtual void joyThumbstick(int stick, int x, int y);
+        void joyStep(void);
 
         virtual void pointerMove( float inX, float inY );
         virtual void pointerDown( float inX, float inY );
@@ -581,9 +589,8 @@ class LivingLifePage : public GamePage, public ActionListener {
 		bool hetuwIsVogMode();
 		doublePair hetuwGetVogPos();
 		char getTransHintable( TransRecord *inTrans ); // hetuw mod - changed from static and made visible to public
-		
-        virtual void actionPerformed( GUIComponent *inTarget );
-        
+
+        virtual void actionPerformed(GUIComponent *inTarget);
 
     protected:
 

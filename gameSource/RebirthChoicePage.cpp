@@ -176,6 +176,13 @@ void RebirthChoicePage::draw( doublePair inViewCenter,
         }
     }
 
+// controller support:
+// TODO: i should implement UI controls, 
+// for now only option is to reborn
+void RebirthChoicePage::joyButtonUp(int button)
+{
+    setSignal("reborn");
+}
 
 
 void RebirthChoicePage::makeActive( char inFresh ) {

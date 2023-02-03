@@ -2894,6 +2894,7 @@ static void addNewAnimPlayerOnly( LiveObject *inObject, AnimType inNewAnim ) {
         }
     }
 
+#include "joyMod.cpp" // controller support.
 
 static void addNewAnim( LiveObject *inObject, AnimType inNewAnim ) {
     addNewAnimPlayerOnly( inObject, inNewAnim );
@@ -13198,6 +13199,9 @@ void LivingLifePage::step() {
         }
     
     double pageLifeTime = game_getCurrentTime() - mPageStartTime;
+
+    joyStep(); // controller support.
+    // fflush(stdout); // for live updatepowershell command: Get-Content stdout.txt -Wait
 
     if( mServerSocket == -1 ) {
         serverSocketConnected = false;

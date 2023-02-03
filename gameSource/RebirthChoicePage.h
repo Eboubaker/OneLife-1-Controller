@@ -25,6 +25,7 @@ class RebirthChoicePage : public GamePage, public ActionListener {
 
         virtual void makeActive( char inFresh );
         
+        virtual void joyButtonUp(int button); // controller support.
     protected:
     
         Background mBackground;

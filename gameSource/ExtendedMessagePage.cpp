@@ -64,6 +64,10 @@ void ExtendedMessagePage::actionPerformed( GUIComponent *inTarget ) {
     }
 
 
+// controller support:
+void ExtendedMessagePage::joyButtonUp(int button) {
+    setSignal("done");
+}
 
 void ExtendedMessagePage::draw( doublePair inViewCenter, 
                                   double inViewSize ) {
