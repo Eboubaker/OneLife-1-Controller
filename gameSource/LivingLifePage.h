@@ -530,7 +530,8 @@ class LivingLifePage : public GamePage, public ActionListener {
 
         virtual void actionPerformed( GUIComponent *inTarget );
         
-
+        double getLastComputedAge(); // for DiscordController
+        char isSocketconnected();    // for DiscordController
     protected:
 
         int mServerSocket;

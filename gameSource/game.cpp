@@ -104,6 +104,7 @@ CustomRandomSource randSource( 34957197 );
 #include "whiteSprites.h"
 
 #include "message.h"
+#include "DiscordController.h"
 
 
 // should we pull the map
@@ -154,6 +155,7 @@ ReviewPage *reviewPage;
 TwinPage *twinPage;
 PollPage *pollPage;
 GeneticHistoryPage *geneticHistoryPage;
+DiscordController *discordController;
 //TestPage *testPage = NULL;
 
 
@@ -713,6 +715,11 @@ void initFrameDrawer( int inWidth, int inHeight, int inTargetFrameRate,
     rebirthChoicePage = new RebirthChoicePage;
     settingsPage = new SettingsPage;
 
+    discordController = new DiscordController;
+    EDiscordResult result = discordController->connect(); // TODO: does this block while connecting?
+    if (result != EDiscordResult::DiscordResult_Ok) {
+        printf("game error: discord connection not successful\n");
+        }
 
     char *reviewURL = 
         SettingsManager::getStringSetting( "reviewServerURL", "" );
@@ -1744,7 +1751,7 @@ void drawFrame( char inUpdate ) {
 
 
         if( currentGamePage == loadingPage ) {
-            
+
             switch( loadingPhase ) {
                 case 0: {
                     float progress;
@@ -2491,6 +2498,46 @@ void drawFrame( char inUpdate ) {
                 quitGame();
                 }
             }
+        if (discordController != NULL) {
+            if(currentGamePage == loadingPage) {
+                discordController->step(DiscordCurrentGamePage::LOADING_PAGE, NULL);
+                }
+            else if (currentGamePage == livingLifePage) {
+                if (!livingLifePage->isSocketconnected()) {
+                    discordController->step(DiscordCurrentGamePage::WAITING_TO_BE_BORN_PAGE, NULL);
+                    }
+                else{
+                    discordController->step(DiscordCurrentGamePage::LIVING_LIFE_PAGE, livingLifePage);
+                    }
+                }
+            else if (currentGamePage == settingsPage) {
+                discordController->step(DiscordCurrentGamePage::SETTINGS_PAGE, NULL);
+                }
+            else if (currentGamePage == extendedMessagePage) {
+                if(0 == strcmp("connectionLost", extendedMessagePage->getMessageKey())) {
+                    discordController->step(DiscordCurrentGamePage::CONNECTION_LOST_PAGE, NULL);
+                    }
+                else if (0 == strcmp("youDied", extendedMessagePage->getMessageKey())) {
+                    discordController->step(DiscordCurrentGamePage::DEATH_PAGE, livingLifePage);
+                    }
+                else if (0 == strcmp("connectionFailed", extendedMessagePage->getMessageKey())) {
+                    discordController->step(DiscordCurrentGamePage::DISONNECTED_PAGE, NULL);
+                    }
+                else {
+                    discordController->step(DiscordCurrentGamePage::MAIN_MENU_PAGE, NULL);
+                    }
+                }
+            else if (currentGamePage == getServerAddressPage) {
+                discordController->step(DiscordCurrentGamePage::WAITING_TO_BE_BORN_PAGE, NULL);
+                }
+            else {
+                discordController->step(DiscordCurrentGamePage::MAIN_MENU_PAGE, NULL);
+                }
+            EDiscordResult result = discordController->runCallbacks();
+            if (discordController->runCallbacks() != EDiscordResult::DiscordResult_Ok)
+                printf("game error discordController->runCallbacks(): failed with return code %d\n", result);
+            }
+        
         }
     
 

@@ -43,9 +43,11 @@ class SettingsPage : public GamePage, public ActionListener {
         int mEnableFOVSetting;
         int mEnableKActionsSetting;
         int mEnableCenterCameraSetting;
-        
+        int mDiscordRichPresenceSetting;
+        int mDiscordRichPresenceDetailsSetting;
+
         int mPage;
-        
+
         SoundUsage mTestSound;
 
         double mMusicStartTime;
@@ -60,6 +62,7 @@ class SettingsPage : public GamePage, public ActionListener {
         TextButton mControlButton;
         TextButton mScreenButton;
         TextButton mSoundButton;
+        TextButton mDiscordButton;
         TextButton mBackButton;
         
         TextButton mEditAccountButton;
@@ -89,5 +92,7 @@ class SettingsPage : public GamePage, public ActionListener {
         ValueSlider mMusicLoudnessSlider;
         ValueSlider mSoundEffectsLoudnessSlider;
 
-
+        // Discord
+        CheckboxButton mEnableDiscordRichPresence;
+        CheckboxButton mEnableDiscordRichPresenceDetails;
     };

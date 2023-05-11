@@ -16,10 +16,11 @@ class ExtendedMessagePage : public GamePage, public ActionListener {
         
 
         void setMessageKey( const char *inMessageKey );
+        char *getMessageKey(); // for discord controller
         
         // destroyed by caller
         void setSubMessage( const char *inMessage );
-        
+
 
         virtual void actionPerformed( GUIComponent *inTarget );
 

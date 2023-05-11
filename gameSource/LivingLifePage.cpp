@@ -24010,3 +24010,14 @@ bool LivingLifePage::dirIsSafeToWalk(int x, int y, int dir) {
 	return true;
 }
 
+
+double LivingLifePage::getLastComputedAge() {
+    // for DiscordController
+    return ourAge;
+    }
+char LivingLifePage::isSocketconnected() {
+    // for DiscordController
+    if (mServerSocket == -1)
+        return false;
+    return true;
+}

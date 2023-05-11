@@ -47,6 +47,13 @@ void ExtendedMessagePage::setMessageKey( const char *inMessageKey ) {
     mMessageKey = inMessageKey;
     }
 
+char *ExtendedMessagePage::getMessageKey() {
+    // for discortd controller
+    if(mMessageKey == NULL)
+        return NULL;
+    return stringDuplicate(mMessageKey);
+}
+
 void ExtendedMessagePage::setSubMessage( const char *inMessage ) {
     if( mSubMessage != NULL ) {
         delete [] mSubMessage;
